@@ -14,20 +14,20 @@ Framework de automatizacion para testing de una tienda e-commerce usando **Selen
 
 ```
 src/
-├── main/java/com/shopzone/pages/    --> Page Objects
-│   ├── BasePage.java                --> Clase base con metodos comunes
+├── main/java/com/shopzone/pages/    -> Page Objects
+│   ├── BasePage.java                -> Clase base con metodos comunes
 │   ├── LoginPage.java
 │   ├── ProductsPage.java
 │   ├── CartPage.java
 │   └── CheckoutPage.java
 └── test/java/com/shopzone/
     ├── base/
-    │   └── BaseTest.java            --> Setup y teardown del driver
+    │   └── BaseTest.java            -> Setup y teardown del driver
     └── tests/
-        ├── LoginTest.java           --> Tests de login (valido, invalido, bloqueado)
-        ├── ProductsTest.java        --> Tests de productos y ordenamiento
-        ├── CartTest.java            --> Tests del carrito
-        └── CheckoutTest.java        --> Tests del flujo de compra
+        ├── LoginTest.java           -> Tests de login (valido, invalido, bloqueado)
+        ├── ProductsTest.java        -> Tests de productos y ordenamiento
+        ├── CartTest.java            -> Tests del carrito
+        └── CheckoutTest.java        -> Tests del flujo de compra
 ```
 
 ## Sitio testeado
@@ -52,7 +52,7 @@ mvn test -DsuiteXmlFile=testng.xml
 ## Tests incluidos
 
 | Suite | Tests | Que valida |
-|-------|-------|------------|
+
 | LoginTest | 5 | Login valido, usuario invalido, campos vacios, usuario bloqueado |
 | ProductsTest | 7 | Carga de productos, agregar/remover del carrito, ordenamiento por precio y nombre |
 | CartTest | 4 | Carrito vacio, agregar items, eliminar items, navegacion |
