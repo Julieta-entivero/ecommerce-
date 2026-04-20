@@ -1,5 +1,8 @@
 package com.shopzone.pages;
 
+import com.shopzone.utils.ConfigReader;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -15,7 +18,8 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        int timeout = ConfigReader.getInt("explicit.wait.seconds");
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         PageFactory.initElements(driver, this);
     }
 
@@ -38,7 +42,7 @@ public class BasePage {
     protected boolean isDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
-        } catch (Exception e) {
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
     }

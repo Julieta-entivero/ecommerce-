@@ -30,6 +30,12 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = "[data-test='error']")
     private WebElement errorMsg;
 
+    @FindBy(className = "summary_subtotal_label")
+    private WebElement subtotalLabel;
+
+    @FindBy(className = "summary_tax_label")
+    private WebElement taxLabel;
+
     @FindBy(className = "summary_total_label")
     private WebElement totalLabel;
 
@@ -73,5 +79,20 @@ public class CheckoutPage extends BasePage {
 
     public String getTotal() {
         return getText(totalLabel);
+    }
+
+    public double getSubtotalValue() {
+        String text = getText(subtotalLabel);
+        return Double.parseDouble(text.replaceAll("[^0-9.]", ""));
+    }
+
+    public double getTaxValue() {
+        String text = getText(taxLabel);
+        return Double.parseDouble(text.replaceAll("[^0-9.]", ""));
+    }
+
+    public double getTotalValue() {
+        String text = getText(totalLabel);
+        return Double.parseDouble(text.replaceAll("[^0-9.]", ""));
     }
 }

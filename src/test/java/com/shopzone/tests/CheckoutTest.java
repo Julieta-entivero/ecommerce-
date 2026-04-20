@@ -2,6 +2,7 @@ package com.shopzone.tests;
 
 import com.shopzone.base.BaseTest;
 import com.shopzone.pages.*;
+import com.shopzone.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,11 +10,13 @@ import org.testng.annotations.Test;
 public class CheckoutTest extends BaseTest {
 
     private ProductsPage productsPage;
+    private final String USER = ConfigReader.get("standard.user");
+    private final String PASS = ConfigReader.get("standard.password");
 
     @BeforeMethod
     public void loginAndInit() {
         LoginPage loginPage = new LoginPage(driver);
-        productsPage = loginPage.login("standard_user", "secret_sauce");
+        productsPage = loginPage.login(USER, PASS);
     }
 
     @Test
@@ -86,10 +89,14 @@ public class CheckoutTest extends BaseTest {
         checkoutPage.fillInfo("Julieta", "Entivero", "5000");
         checkoutPage.continueCheckout();
 
-        // verificar que el total no sea vacio
-        String total = checkoutPage.getTotal();
-        Assert.assertNotNull(total);
-        Assert.assertTrue(total.contains("$"));
+        double subtotal = checkoutPage.getSubtotalValue();
+        double tax = checkoutPage.getTaxValue();
+        double total = checkoutPage.getTotalValue();
+
+        Assert.assertTrue(subtotal > 0, "El subtotal debe ser mayor a 0");
+        Assert.assertTrue(tax > 0, "El tax debe ser mayor a 0");
+        Assert.assertEquals(total, Math.round((subtotal + tax) * 100.0) / 100.0,
+                "El total debe ser igual a subtotal + tax");
 
         checkoutPage.finish();
         Assert.assertTrue(checkoutPage.isSuccessDisplayed());

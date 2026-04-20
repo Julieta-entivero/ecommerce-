@@ -1,6 +1,7 @@
 package com.shopzone.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +34,7 @@ public class ProductsPage extends BasePage {
     public boolean isPageLoaded() {
         try {
             return getText(pageTitle).equals("Products");
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
@@ -57,6 +58,7 @@ public class ProductsPage extends BasePage {
                 return;
             }
         }
+        throw new NoSuchElementException("Producto no encontrado: " + productName);
     }
 
     public void removeProductByName(String productName) {
@@ -68,12 +70,13 @@ public class ProductsPage extends BasePage {
                 return;
             }
         }
+        throw new NoSuchElementException("Producto no encontrado para remover: " + productName);
     }
 
     public String getCartBadgeCount() {
         try {
             return cartBadge.getText();
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
             return "0";
         }
     }

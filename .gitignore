@@ -4,4 +4,7 @@ target/
 .DS_Store
 test-output/
 reports/
+screenshots/
 *.class
+*.log
+.env

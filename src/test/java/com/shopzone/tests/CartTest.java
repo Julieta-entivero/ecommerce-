@@ -4,6 +4,7 @@ import com.shopzone.base.BaseTest;
 import com.shopzone.pages.CartPage;
 import com.shopzone.pages.LoginPage;
 import com.shopzone.pages.ProductsPage;
+import com.shopzone.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,11 +12,13 @@ import org.testng.annotations.Test;
 public class CartTest extends BaseTest {
 
     private ProductsPage productsPage;
+    private final String USER = ConfigReader.get("standard.user");
+    private final String PASS = ConfigReader.get("standard.password");
 
     @BeforeMethod
     public void loginAndInit() {
         LoginPage loginPage = new LoginPage(driver);
-        productsPage = loginPage.login("standard_user", "secret_sauce");
+        productsPage = loginPage.login(USER, PASS);
     }
 
     @Test

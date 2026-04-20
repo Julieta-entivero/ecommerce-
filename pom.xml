@@ -37,11 +37,7 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.extentreports</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>5.1.1</version>
-        </dependency>
+        <!-- ExtentReports removido: no se estaba utilizando -->
     </dependencies>
 
     <build>
